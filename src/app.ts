@@ -1,19 +1,29 @@
 import {Command, CommandParser} from './Parser';
+import {Map} from './Map'
+class Labyrinth {
+  private parser: CommandParser;
+  private board: Map
 
-//an example input handler function
-function handleInput(cmd:Command, arg:string):boolean {
-  //the arguments are the command and "arguments" the user has entered
-  console.log("Handling", cmd, "with argument '"+arg+"'");
-
-  //an example of handling a particular input
-  if(cmd === Command.GO){ 
-    console.log("But I want to stay!");
+  constructor() {
+    this.board = new Map();
+    this.parser = new CommandParser(
+      (cmd: Command, arg: string) => this.handleInput(cmd, arg)
+    );
   }
 
-  return true; //return true to indicate that it should prompt for another input
+  private handleInput(cmd:Command, arg:string) :boolean {
+    //the arguments are the command and "arguments" the user has entered
+    console.log("Handling", cmd, "with argument '"+arg+"'");
+  
+    //an example of handling a particular input
+    if(cmd === Command.GO){ 
+      console.log("But I want to stay!");
+    }
+  
+    return true; //return true to indicate that it should prompt for another input
+  }
 }
 
-//an example of using the CommandParser
-let parser = new CommandParser(handleInput); //pass in the "handler" callback
-console.log('Input a command:')
-parser.start();
+function main() {
+  let labyrinth = new Labyrinth()
+}

@@ -1,0 +1,76 @@
+  
+{
+    "entry":
+        {
+        "name":"Cave entry",
+        "description":"You entered a small cave. There is an opening to enter it. You have to find the treasure and get out fast!",
+        "hazard" : "",
+        "hazardkey" : "",
+        "item":"flashlight",
+        "neighbor": 
+            {
+
+                "south": "hallway"
+            }
+        },  
+    "hallway": {
+        "name": "The long confusing hallway",
+        "description": "",
+        "hazard": "It is very dark, you cannot move without some light.",
+        "hazardkey": "flashlight",
+        "neighbor": 
+        {
+            "south": "impasse",
+            "north": "entry",
+            "east": "armory",
+            "west": "treasury"
+        }
+    },
+    "armory": {
+        "name": "The armory",
+        "description": "You have entered a room with several cases of armory left by the ancient people",
+        "item": "swords",
+        "neighbor": 
+        {
+            "west": "hallway",
+            "south": "box"
+        }
+    },
+    "treasury": {
+        "name": "The Treasury",
+        "description": "You have entered a magnificent part of the cave with great treasures, pearls, gold.",
+        "item": "treasure",
+        "neighbor":
+        {
+            "south": "paradise",
+            "east": "hallway"
+        }
+    },
+    "kitchen": {
+        "name": "The Kitchen",
+        "description": "You have entered the kitchen, a magical place where you can eat cake!",
+        "item": "cake",
+        "neighbor":
+        {
+            "north": "treasury",
+            "south": "exit",
+            "east": "impasse"
+        }
+    },
+    "impasse": {
+        "name": "The impasse",
+        "description": "You have entered a crossroads, choose wisely!",
+        "item": "key",
+        "neighbor":
+        {
+            "north": "hallway",
+            "east": "box",
+            "west": "kitchen"
+        }
+    },
+   "exit": {
+        "name": "exit",
+        "description": "Yay! You've made it to an exit."
+    }
+    
+}
