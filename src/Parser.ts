@@ -44,15 +44,15 @@ export class CommandParser {
     this.io.on('line', (line) => {
       let firstSpace = line.indexOf(' ');
       if(firstSpace === -1) firstSpace = line.length;
-      let cmd = line.substr(0, firstSpace).toUpperCase();
-
+      // let cmd: Command =  line.substr(0, firstSpace).toUpperCase();
+      let cmd = line.substr(0, firstSpace).toUpperCase() as keyof typeof Command
       if(cmd === Command.QUIT){
         //could add "goodbye" message here
         this.io.close();
       }
       else if(Command[cmd]) {
         let arg = line.substr(firstSpace+1);
-        let shouldProceed = this.handler(cmd, arg); //call handler function!
+        let shouldProceed = this.handler(Command[cmd], arg); //call handler function!
         if(shouldProceed){
           this.io.prompt();
         } else {

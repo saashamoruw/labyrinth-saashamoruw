@@ -4,8 +4,6 @@
         {
         "name":"Cave entry",
         "description":"You entered a small cave. There is an opening to enter it. You have to find the treasure and get out fast!",
-        "hazard" : "",
-        "hazardkey" : "",
         "item":"flashlight",
         "neighbor": 
             {
@@ -15,8 +13,8 @@
         },  
     "hallway": {
         "name": "The long confusing hallway",
-        "description": "",
-        "hazard": "It is very dark, you cannot move without some light.",
+        "description": "A dark pathway, with eerie noises and the feeling of pure fear.",
+        "hazard": "You cannot move without some light.",
         "hazardkey": "flashlight",
         "neighbor": 
         {
@@ -42,7 +40,7 @@
         "item": "treasure",
         "neighbor":
         {
-            "south": "paradise",
+            "south": "kitchen",
             "east": "hallway"
         }
     },
@@ -68,9 +66,25 @@
             "west": "kitchen"
         }
     },
+    "box": {
+        "name": "The box",
+        "description": "You have entered a very small dingy room which smells like feces",
+        "hazard": "You have been locked out!",
+        "hazardkey":"key",
+        "neighbor": {
+            "north": "armory",
+            "west": "impasse"
+        }
+
+    },
    "exit": {
         "name": "exit",
-        "description": "Yay! You've made it to an exit."
+        "description": "Yay! You've made it to an exit.",
+        "hazard": "You must use the treasure to be able to exit",
+        "hazardkey": "treasure",
+        "neighbor": {
+            "north": "kitchen"
+        }
     }
     
 }
