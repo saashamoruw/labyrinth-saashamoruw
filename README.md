@@ -49,9 +49,13 @@ you can go east down the hall.
 
 ## Setup
 - Clone the repository <br>
-`git clone https://github.com/info443a-sp21/labyrinth-saashamoruw.git`
+```
+git clone https://github.com/info443a-sp21/labyrinth-saashamoruw.git
+```
 - Install typescript <br>
-`npm install -g typescript`
+```
+npm install -g typescript
+```
 - Compile and run <br>
 ```
 npm install
