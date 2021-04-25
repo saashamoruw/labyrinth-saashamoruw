@@ -1,4 +1,9 @@
 export class Monster implements IHazard {
+
+    public moveMonster() {
+        
+    }
+    
      /**
      * Uses the item to overcome the hazard
      */
@@ -18,4 +23,5 @@ export class Monster implements IHazard {
      */
     public print(): void {
     }
+
 }

@@ -12,7 +12,7 @@ export class Area {
     Shows all the information about the area
     */
     public print(): void {
-        console.log("This is ", this.name);
+        console.log("This is ", this.name.toUpperCase());
         this.printDescription()
         if(this.item === undefined) {
             console.log("There are no items in this room")
@@ -22,6 +22,7 @@ export class Area {
         if (!this.hazard.haveOvercome()) {
             this.printHazardDescription()
         }
+        this.showPossibleDirections()
     }
 
     /*
@@ -44,7 +45,7 @@ export class Area {
     /**
      * Checks if the item is present in the area
      */
-    public hasItem(item: String) {
+    public hasItem(item: String): boolean {
         if(item === this.item) {
             return true
         } else {
@@ -55,14 +56,14 @@ export class Area {
     /**
      * Shows the hazard currently in the area
      */
-    public printHazardDescription() {
+    public printHazardDescription(): void {
         this.hazard.print()
     }
 
     /**
      * Checks if the hazard in the area has been overcome or not
      */
-     public ifHazardPassed() {
+     public ifHazardPassed(): boolean {
         return this.hazard.haveOvercome();
     }
 
@@ -73,20 +74,19 @@ export class Area {
         return this.hazard.overcomeHazard(item)
     }
 
+    public showPossibleDirections(): void {
+        this.surroundings.doorways()
+    }
 
     /**
      * Gets the new area to move to in the direction provided
      */
     public moveTo(direction: String): String {
-        let newAreaKey = this.surroundings.moveInDirection(direction)
+        let newAreaKey = this.surroundings.getAreaInDirection(direction)
         if(newAreaKey === undefined) {
             return ""
         } else {
            return newAreaKey
         }
     }
-
-
-    
-
 }

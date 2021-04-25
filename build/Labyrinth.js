@@ -13,8 +13,21 @@ class Labyrinth {
     Constructs all the areas and initializes all labyrinth elements
     */
     constructor() {
+        this.gameMap = this.constructMap();
+        const startingArea = this.gameMap.get("entry");
+        if (startingArea === undefined) {
+            throw new Error('Could not initialize Labyrinth map');
+        }
+        this.inventory = new Inventory_1.Inventory();
+        this.startArea = startingArea;
+        this.prevArea = startingArea;
+        this.currArea = startingArea;
+    }
+    /**
+     * Uses hardcoded JSON file to construct labyrinth
+     */
+    constructMap() {
         let blueprint = require('../map.json');
-        const startingArea = "entry";
         let map = new Map();
         for (const key in blueprint) {
             const value = blueprint[key];
@@ -23,17 +36,13 @@ class Labyrinth {
             let area = new Area_1.Area(value.name, value.description, value.item, hazard, surrounding);
             map.set(key, area);
         }
-        this.gameMap = map;
-        this.inventory = new Inventory_1.Inventory();
-        this.prevArea = map.get(startingArea);
-        this.currArea = map.get(startingArea);
-        this.start = map.get(startingArea);
+        return map;
     }
     /*
     prints out the description of Area where player starts
     */
     startLabyrinth() {
-        this.start.print();
+        this.startArea.print();
     }
     /*
     Enables the player to move through the Labyrinth

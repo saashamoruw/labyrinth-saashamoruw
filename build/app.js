@@ -58,8 +58,13 @@ class LabyrinthGame {
     }
 }
 function main() {
-    let labyrinth = new LabyrinthGame();
-    labyrinth.start();
+    try {
+        let labyrinth = new LabyrinthGame();
+        labyrinth.start();
+    }
+    catch (e) {
+        console.log(e.message);
+    }
 }
 main();
 //# sourceMappingURL=app.js.map

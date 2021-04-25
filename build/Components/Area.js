@@ -16,7 +16,7 @@ class Area {
     Shows all the information about the area
     */
     print() {
-        console.log("This is ", this.name);
+        console.log("This is ", this.name.toUpperCase());
         this.printDescription();
         if (this.item === undefined) {
             console.log("There are no items in this room");
@@ -27,6 +27,7 @@ class Area {
         if (!this.hazard.haveOvercome()) {
             this.printHazardDescription();
         }
+        this.showPossibleDirections();
     }
     /*
     Shows just the description of the area
@@ -71,6 +72,9 @@ class Area {
      */
     overcomeHazard(item) {
         return this.hazard.overcomeHazard(item);
+    }
+    showPossibleDirections() {
+        this.surroundings.doorways();
     }
     /**
      * Gets the new area to move to in the direction provided

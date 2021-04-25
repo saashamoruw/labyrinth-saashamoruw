@@ -2,14 +2,14 @@ import {Area} from './Components/Area'
 import {Hazard} from './Components/Hazard'
 import {Surroundings} from './Components/Surroundings'
 import {Inventory} from './Components/Inventory'
+
 /*
 Labyrinth keeps track of all the elements of the game, and updates them as game goes on. 
 */
-
 export class Labyrinth {
     private gameMap: Map<String, Area>
     private inventory: Inventory
-    private start: Area
+    private startArea: Area
     private prevArea: Area
     private currArea: Area
 
@@ -17,8 +17,22 @@ export class Labyrinth {
     Constructs all the areas and initializes all labyrinth elements
     */
     constructor() {
+        this.gameMap = this.constructMap()
+        const startingArea = this.gameMap.get("entry")
+        if(startingArea === undefined) {
+            throw new Error('Could not initialize Labyrinth map')
+        }
+        this.inventory = new Inventory()
+        this.startArea = startingArea
+        this.prevArea = startingArea
+        this.currArea = startingArea
+    }
+
+    /**
+     * Uses hardcoded JSON file to construct labyrinth
+     */
+    private constructMap(): Map<String, Area> {
         let blueprint = require('../map.json');
-        const startingArea = "entry"
         let map = new Map()
         for (const key in blueprint) {
             const value = blueprint[key]
@@ -28,19 +42,13 @@ export class Labyrinth {
             let area = new Area(value.name, value.description, value.item, hazard, surrounding)
             map.set(key, area)
         }
-        this.gameMap = map
-        this.inventory = new Inventory()
-        this.prevArea = map.get(startingArea)
-        this.currArea = map.get(startingArea)
-        this.start = map.get(startingArea)
-
+        return map
     }
-
     /*
     prints out the description of Area where player starts
     */
     public startLabyrinth(): void {
-        this.start.print()
+        this.startArea.print()
     }
 
     /*
@@ -69,28 +77,28 @@ export class Labyrinth {
     /*
     Displays the description of the area the player is currently in
     */
-    public showAreaDescription(): void{
+    public showAreaDescription(): void {
         this.currArea.printDescription()
     }
 
     /**
      * Shows the items currently in the inventory
      */
-    public showInventory() {
+    public showInventory(): void {
         this.inventory.showInventory()
     }
 
     /**
      * Gets the item from the area and adds it to the inventory
      */
-    public getItem(item: String) {
+    public getItem(item: String): boolean {
         return this.inventory.getItem(this.currArea, item)
     }
 
     /**
      * Uses the item from the inventory to use on a hazard in the area
      */
-    public useItem(item: String) {
+    public useItem(item: String): boolean {
         return this.inventory.useItem(this.currArea, item)
     }
 
@@ -98,7 +106,7 @@ export class Labyrinth {
     Checks if the player is currently in danger and has not overcome the hazard in the area
     If the player is not currently in danger, the direction is checked for validity of a dead end
     */
-    private safeFromHazardAndNoDeadEnd(direction:String) {
+    private safeFromHazardAndNoDeadEnd(direction:String): boolean {
         if(!this.currArea.ifHazardPassed()) {
             this.currArea.printHazardDescription()
             return false

@@ -27,6 +27,22 @@ class Surroundings {
             }
         }
     }
+    doorways() {
+        let possDir = [];
+        if (this.north !== undefined) {
+            possDir.push("north");
+        }
+        if (this.south !== undefined) {
+            possDir.push("south");
+        }
+        if (this.east !== undefined) {
+            possDir.push("east");
+        }
+        if (this.west !== undefined) {
+            possDir.push("west");
+        }
+        console.log("Possible doorways are present in directions: ", possDir.toString());
+    }
 }
 exports.Surroundings = Surroundings;
 //# sourceMappingURL=Surroundings.js.map

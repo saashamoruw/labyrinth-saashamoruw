@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Monster = void 0;
 class Monster {
+    moveMonster() {
+    }
     /**
     * Uses the item to overcome the hazard
     */
