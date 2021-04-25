@@ -1,1 +1,1 @@
-{"version":3,"file":"Monster.js","sourceRoot":"","sources":["../../src/Components/Monster.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Monster.js","sourceRoot":"","sources":["../../src/Components/Monster.ts"],"names":[],"mappings":";;;AAAA,MAAa,OAAO;IACf;;MAEE;IACI,cAAc,CAAC,IAAY;QAC9B,OAAO,IAAI,CAAA;IACf,CAAC;IAED;;OAEG;IACI,YAAY;QACf,OAAO,IAAI,CAAA;IACf,CAAC;IAED;;OAEG;IACI,KAAK;IACZ,CAAC;CACJ;AApBD,0BAoBC"}

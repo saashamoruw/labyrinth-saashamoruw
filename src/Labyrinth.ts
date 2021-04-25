@@ -1,13 +1,14 @@
 import {Area} from './Components/Area'
 import {Hazard} from './Components/Hazard'
 import {Surroundings} from './Components/Surroundings'
-
+import {Inventory} from './Components/Inventory'
 /*
 Labyrinth keeps track of all the elements of the game, and updates them as game goes on. 
 */
+
 export class Labyrinth {
     private gameMap: Map<String, Area>
-    private inventory: String[]
+    private inventory: Inventory
     private start: Area
     private prevArea: Area
     private currArea: Area
@@ -17,6 +18,7 @@ export class Labyrinth {
     */
     constructor() {
         let blueprint = require('../map.json');
+        const startingArea = "entry"
         let map = new Map()
         for (const key in blueprint) {
             const value = blueprint[key]
@@ -27,10 +29,10 @@ export class Labyrinth {
             map.set(key, area)
         }
         this.gameMap = map
-        this.prevArea = map.get("entry")
-        this.currArea = map.get("entry")
-        this.inventory = []
-        this.start = map.get("entry")
+        this.inventory = new Inventory()
+        this.prevArea = map.get(startingArea)
+        this.currArea = map.get(startingArea)
+        this.start = map.get(startingArea)
 
     }
 
@@ -65,57 +67,32 @@ export class Labyrinth {
     }
 
     /*
-    item is taken from the Area and saved to the invenotry.
-    */
-    public getItem(item: String) {
-        if(this.inventory.indexOf(item) > -1) {
-            console.log("You have already taken this item")
-        } else if(this.currArea.hasItem(item)) {
-            this.inventory.push(item)
-            console.log(item, " has been added to your inventory")
-        } else {
-            console.log("This item is not in this room")
-        }
-        return true
-    }
-
-    /*
-    Player can use an item currently in their inventory
-    This also checks if the item used can overcome the hazard in the area
-    If the hazard overcome is at the exit, the player wins the game
-    */
-    public useItem(item: String): boolean {
-        let index = this.inventory.indexOf(item)
-        if(index === -1) {
-            console.log("This item does not exist in your inventory")
-        }
-        else if(this.currArea.overcomeHazard(item)) {
-            console.log("You have overcome this hazard!")
-            this.removeItemFromInventory(index)
-            // If this area was the exit then player wins the game
-            if(this.currArea.isExit()) {
-                return false
-            }
-        } else {
-            console.log("You cannot overcome this hazard with this item.")
-        }
-        return true
-    }
-
-    /*
-    Shows all the items in the player inventory
-    */
-    public showInventory(): void {
-        console.log(this.inventory.toString())
-    }
-
-    /*
     Displays the description of the area the player is currently in
     */
     public showAreaDescription(): void{
         this.currArea.printDescription()
     }
 
+    /**
+     * Shows the items currently in the inventory
+     */
+    public showInventory() {
+        this.inventory.showInventory()
+    }
+
+    /**
+     * Gets the item from the area and adds it to the inventory
+     */
+    public getItem(item: String) {
+        return this.inventory.getItem(this.currArea, item)
+    }
+
+    /**
+     * Uses the item from the inventory to use on a hazard in the area
+     */
+    public useItem(item: String) {
+        return this.inventory.useItem(this.currArea, item)
+    }
 
     /*
     Checks if the player is currently in danger and has not overcome the hazard in the area
@@ -139,15 +116,6 @@ export class Labyrinth {
     private setCurrAndPrevAreas(setToCurrArea: Area, setToPrevArea: Area): void {
         this.currArea = setToCurrArea
         this.prevArea = setToPrevArea
-    }
-
-    /*
-    Removes item from inventory after use
-    */
-    private removeItemFromInventory(index: number) {
-        if (index > -1) {
-            this.inventory.splice(index, 1);
-         }
     }
 
 }

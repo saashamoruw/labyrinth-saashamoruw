@@ -8,13 +8,15 @@ class Hazard {
     /**
      * Initialized the hazard along with the key to overcome it
      */
-    constructor(description, key) {
-        this.description = description;
-        this.key = key;
+    constructor(hazardDescr, hazardKey) {
+        this.hazardDescr = hazardDescr;
+        this.hazardKey = hazardKey;
         this.overcame = false;
-        if (key === undefined) {
+        if (hazardKey === undefined) {
             this.overcame = true;
         }
+        this.key = hazardKey;
+        this.description = hazardDescr;
     }
     /**
      * Uses the item to overcome the hazard

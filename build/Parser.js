@@ -63,7 +63,7 @@ class CommandParser {
             // let cmd: Command =  line.substr(0, firstSpace).toUpperCase();
             let cmd = line.substr(0, firstSpace).toUpperCase();
             if (cmd === Command.QUIT) {
-                //could add "goodbye" message here
+                console.log("Thank you for playing!");
                 this.io.close();
             }
             else if (Command[cmd]) {
