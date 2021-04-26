@@ -2,8 +2,8 @@
 {
     "entry":
         {
-        "name":"Cave entry",
-        "description":"You entered a small cave. There is an opening to enter it. You have to find the treasure and get out fast!",
+        "name":"the cave entry",
+        "description":"You have entered a small cave. You have to find the treasure and get out fast! But be careful, a monster is wandering and it's hungry",
         "item":"flashlight",
         "neighbor": 
             {
@@ -12,8 +12,8 @@
         },  
     "hallway": {
         "name": "The long confusing hallway",
-        "description": "A dark pathway, with eerie noises and the feeling of pure fear.",
-        "hazard": "You cannot move without some light.",
+        "description": "You have entered a dark pathway, with eerie noises and the feeling of pure fear.",
+        "hazard": "You cannot move without some light to see where you are going!",
         "hazardkey": "flashlight",
         "neighbor": 
         {
@@ -25,7 +25,7 @@
     },
     "armory": {
         "name": "The armory",
-        "description": "You have entered a room with several cases of armory left by the ancient people",
+        "description": "You have entered a room with several boxes. One box has fallen over and you can see ancient war armor",
         "item": "swords",
         "neighbor": 
         {
@@ -35,7 +35,7 @@
     },
     "treasury": {
         "name": "The Treasury",
-        "description": "You have entered a magnificent part of the cave with great treasures, pearls, gold.",
+        "description": "You have entered the treasury. This is a magnificent part of the cave with great treasures, pearls, gold.",
         "item": "treasure",
         "neighbor":
         {
@@ -45,7 +45,7 @@
     },
     "kitchen": {
         "name": "The Kitchen",
-        "description": "You have entered the kitchen, a magical place where you can eat cake!",
+        "description": "You have entered the kitchen. This is a magical place where it smells like pizza you can eat cake!",
         "item": "cake",
         "neighbor":
         {
@@ -54,9 +54,9 @@
             "east": "impasse"
         }
     },
-    "impasse": {
-        "name": "The impasse",
-        "description": "You have entered a crossroads, choose wisely!",
+    "study": {
+        "name": "The study",
+        "description": "You have entered the study. There is one mysteriously lit candle and several letters. One of the letters seems to be from a stuck adventurer, inside which there is an object.",
         "item": "key",
         "neighbor":
         {
@@ -65,9 +65,9 @@
             "west": "kitchen"
         }
     },
-    "box": {
-        "name": "The box",
-        "description": "You have entered a very small dingy room which smells like feces",
+    "impasse": {
+        "name": "The Impasse",
+        "description": "You have entered a very small dingy room. You can smell hints of coffee and you lightheaded.",
         "hazard": "You have been locked out!",
         "hazardkey":"key",
         "neighbor": {
@@ -77,9 +77,9 @@
 
     },
    "exit": {
-        "name": "exit",
-        "description": "Yay! You've made it to an exit.",
-        "hazard": "You must use the treasure to be able to exit",
+        "name": "The escape",
+        "description": "You have finally reached the exit. You can see light and feel a cool breeze.",
+        "hazard": "You must have the treasure to be able to exit",
         "hazardkey": "treasure",
         "neighbor": {
             "north": "kitchen"

@@ -12,6 +12,7 @@ class Monster {
         this.description = "A big scary monster who likes to eat humans for fun has entered the room. The only thing that can slay it is an offering of cake :)";
         this.key = "cake";
         this.nextArea = this.areas.length - 1;
+        // console.log(areas)
     }
     /**
      * Moves the monster through the labyrinth
@@ -23,7 +24,6 @@ class Monster {
         this.changeNextArea();
         let newArea = this.areas[this.nextArea];
         this.currArea = newArea;
-        // console.log("Monster just moved to ", newArea)
     }
     /**
      * Returns the name of the current area the monster is in

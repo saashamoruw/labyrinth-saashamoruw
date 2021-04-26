@@ -42,6 +42,9 @@ export class Inventory {
         }
     }
 
+    /**
+     * Checks if item exists in the inventory
+     */
     public checkIfItemExists(item: String) {
         if(this.inventory.indexOf(item) === -1) {
             console.log("This item does not exist in your inventory")

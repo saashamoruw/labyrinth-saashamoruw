@@ -12,15 +12,12 @@ export class Area {
     Shows all the information about the area
     */
     public print(): void {
-        console.log("This is ", this.name.toUpperCase());
+        console.log("\nThis is", this.name.toUpperCase());
         this.printDescription()
         if(this.item === undefined) {
             console.log("There are no items in this room")
         } else {
             console.log("In this room there may or may not be " + this.item);
-        }
-        if (!this.hazard.haveOvercome()) {
-            this.printHazardDescription()
         }
         this.showPossibleDirections()
     }
@@ -40,7 +37,7 @@ export class Area {
      * Checks if the area is the exit to the labyrinth
      */
     public isExit(): boolean {
-        if(this.name === "exit") {
+        if(this.key === "exit") {
             return true
         }
         return false

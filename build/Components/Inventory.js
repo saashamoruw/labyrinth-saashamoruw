@@ -43,6 +43,9 @@ class Inventory {
             return false;
         }
     }
+    /**
+     * Checks if item exists in the inventory
+     */
     checkIfItemExists(item) {
         if (this.inventory.indexOf(item) === -1) {
             console.log("This item does not exist in your inventory");

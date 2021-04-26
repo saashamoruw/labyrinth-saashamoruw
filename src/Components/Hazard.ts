@@ -38,6 +38,6 @@ export class Hazard implements IHazard {
      * Shows the nature of the hazard
      */
     public print() {
-        console.log("You are in danger! ", this.description)
+        console.log("There is a hazard!", this.description)
     }
 }

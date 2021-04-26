@@ -9,6 +9,7 @@ export class Monster implements IHazard {
     private nextArea: number
     constructor(private areas: String[], private currArea: String) {
         this.nextArea = this.areas.length - 1
+        // console.log(areas)
     }
     
     /**
@@ -21,7 +22,6 @@ export class Monster implements IHazard {
         this.changeNextArea()
         let newArea = this.areas[this.nextArea]
         this.currArea = newArea
-        // console.log("Monster just moved to ", newArea)
     }
     
     /**

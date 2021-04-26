@@ -50,7 +50,7 @@ class Surroundings {
         if (this.west !== undefined) {
             possDir.push("west");
         }
-        console.log("Possible doorways are present in directions: ", possDir.toString());
+        console.log("There are doorways present in the following directions: ", possDir.toString());
     }
 }
 exports.Surroundings = Surroundings;

@@ -38,7 +38,7 @@ class Hazard {
      * Shows the nature of the hazard
      */
     print() {
-        console.log("You are in danger! ", this.description);
+        console.log("There is a hazard!", this.description);
     }
 }
 exports.Hazard = Hazard;

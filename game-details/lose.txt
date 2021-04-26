@@ -1,5 +1,7 @@
 take flashlight
 go south
+go west
+inventory
 use flashlight
-go south
+go west
 use cake

@@ -30,22 +30,6 @@ export class Labyrinth {
         this.currArea = startingArea
     }
 
-    /**
-     * Uses hardcoded JSON file to construct labyrinth
-     */
-    private constructMap(): Map<String, Area> {
-        let blueprint = require('../game-details/map.json');
-        let map = new Map()
-        for (const key in blueprint) {
-            const value = blueprint[key]
-            let hazard = new Hazard(value.hazard, value.hazardkey)
-            let surrounding = new Surroundings(value.neighbor.north, value.neighbor.south, 
-            value.neighbor.east, value.neighbor.west)
-            let area = new Area(key, value.name, value.description, value.item, hazard, surrounding)
-            map.set(key, area)
-        }
-        return map
-    }
     /*
     prints out the description of Area where player starts
     */
@@ -72,7 +56,7 @@ export class Labyrinth {
                 console.log("Invalid direction")
             }
         }
-        return true;
+        return this.checkWin();
     }
 
     public showAreaInformation(): void {
@@ -119,11 +103,50 @@ export class Labyrinth {
     public useItem(item: String): boolean {
         if(!this.isMonsterInArea()) {
             this.monster.move()
-            return this.useItemAndCheckWin(item)
+            return this.inventory.useItem(this.currArea, item)
         } else {
             return this.useItemOnMonster(item)
         }
     }
+
+    /****************************HELPER FUNCTIONS***************************/
+        private checkWin(): boolean {
+            if (this.currArea.getKey() === "exit" && this.inventory.checkIfItemExists("treasure")) {
+                console.log('Congratulations! You have won the game')
+                return false
+            } else {
+                return true
+            }
+        }
+    /**
+     * Uses hardcoded JSON file to construct labyrinth
+     */
+         private constructMap(): Map<String, Area> {
+            let blueprint = require('../game-details/map.json');
+            let map = new Map()
+            for (const key in blueprint) {
+                const value = blueprint[key]
+                let hazard = new Hazard(value.hazard, value.hazardkey)
+                let surrounding = new Surroundings(value.neighbor.north, value.neighbor.south, 
+                value.neighbor.east, value.neighbor.west)
+                let area = new Area(key, value.name, value.description, value.item, hazard, surrounding)
+                map.set(key, area)
+            }
+            return map
+        }
+
+    /**
+     * Current and Previous areas are set as per parameters
+     * Also triggers the monster to move
+    */
+    private setCurrAndPrevAreas(setToCurrArea: Area, setToPrevArea: Area): void {
+        this.currArea = setToCurrArea
+        this.prevArea = setToPrevArea
+        // move the monster every time the player moves
+        if(!this.isMonsterInArea()) {
+            this.monster.move()
+        }
+    }    
 
     /*
     Checks if the player is currently in danger and has not overcome the hazard in the area
@@ -146,32 +169,9 @@ export class Labyrinth {
     }
 
     /**
-     * Current and Previous areas are set as per parameters
-    */
-    private setCurrAndPrevAreas(setToCurrArea: Area, setToPrevArea: Area): void {
-        this.currArea = setToCurrArea
-        this.prevArea = setToPrevArea
-        // move the monster every time the player moves
-        if(!this.isMonsterInArea()) {
-            this.monster.move()
-        }
-    }
-
-    private useItemAndCheckWin(item: String): boolean {
-        // If this area was the exit then player wins the game
-        if(this.inventory.useItem(this.currArea, item) && this.currArea.isExit()) {
-            console.log('Congratulations! You won the game!')
-            return false
-        } 
-        return true
-    }
-    /**
      * Indicates if the wandering monster is in the players area
      */
     private isMonsterInArea(): boolean {
-        // console.log("monster in area? ", this.monster.currentLocation() === this.currArea.getKey())
-        // console.log("Monster in: ", this.monster.currentLocation())
-        // console.log("You are in: ", this.currArea.getKey())
         return (!this.monster.haveOvercome() && (this.monster.currentLocation() === this.currArea.getKey()))
     }
 
@@ -190,6 +190,7 @@ export class Labyrinth {
             return false
         } else {
             this.monster.died()
+            this.inventory.removeItemFromInventory(item)
             return true
         }
     }
