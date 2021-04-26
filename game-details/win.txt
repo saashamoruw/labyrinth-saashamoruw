@@ -1,0 +1,10 @@
+take flashlight
+go south
+use flashlight
+go west
+take treasure
+go south
+take cake
+use cake
+go south
+use treasure

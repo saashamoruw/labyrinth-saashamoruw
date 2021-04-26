@@ -5,7 +5,7 @@ import {Surroundings} from './Surroundings'
 Represents an area in the labyrinth
 */
 export class Area {
-    constructor(private name: String, private description: String, private item: String, private hazard: Hazard, 
+    constructor(private key: String, private name: String, private description: String, private item: String, private hazard: Hazard, 
         private surroundings: Surroundings) { }
     
     /*
@@ -30,6 +30,10 @@ export class Area {
     */
     public printDescription(): void {
         console.log(this.description);
+    }
+
+    public getKey(): String {
+        return this.key
     }
 
     /**

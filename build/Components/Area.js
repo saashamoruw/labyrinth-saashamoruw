@@ -5,7 +5,8 @@ exports.Area = void 0;
 Represents an area in the labyrinth
 */
 class Area {
-    constructor(name, description, item, hazard, surroundings) {
+    constructor(key, name, description, item, hazard, surroundings) {
+        this.key = key;
         this.name = name;
         this.description = description;
         this.item = item;
@@ -34,6 +35,9 @@ class Area {
     */
     printDescription() {
         console.log(this.description);
+    }
+    getKey() {
+        return this.key;
     }
     /**
      * Checks if the area is the exit to the labyrinth
@@ -80,7 +84,7 @@ class Area {
      * Gets the new area to move to in the direction provided
      */
     moveTo(direction) {
-        let newAreaKey = this.surroundings.moveInDirection(direction);
+        let newAreaKey = this.surroundings.getAreaInDirection(direction);
         if (newAreaKey === undefined) {
             return "";
         }

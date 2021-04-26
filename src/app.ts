@@ -2,6 +2,7 @@ import {Command, CommandParser} from './Parser';
 import {Labyrinth} from './Labyrinth'
 class LabyrinthGame {
   private parser: CommandParser;
+
   private board: Labyrinth
 
   constructor() {
@@ -35,9 +36,7 @@ class LabyrinthGame {
     }
     if (cont) {
       console.log("What is your next move? ");
-    } else {
-      console.log("Congratulations, you have exited the cave!")
-    }
+    } 
     return cont; //return true to indicate that it should prompt for another input
   }
 

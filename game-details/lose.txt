@@ -1,0 +1,5 @@
+take flashlight
+go south
+use flashlight
+go south
+use cake

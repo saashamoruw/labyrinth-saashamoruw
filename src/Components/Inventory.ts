@@ -32,27 +32,29 @@ export class Inventory {
     If the hazard overcome is at the exit, the player wins the game
     */
     public useItem(currArea: Area, item: String): boolean {
-        let index = this.inventory.indexOf(item)
-        if(index === -1) {
-            console.log("This item does not exist in your inventory")
-        }
-        else if(currArea.overcomeHazard(item)) {
+         if(this.checkIfItemExists(item) && currArea.overcomeHazard(item)) {
             console.log("You have overcome this hazard!")
-            this.removeItemFromInventory(index)
-            // If this area was the exit then player wins the game
-            if(currArea.isExit()) {
-                return false
-            }
+            this.removeItemFromInventory(item)
+            return true
         } else {
             console.log("You cannot overcome this hazard with this item.")
+            return false
+        }
+    }
+
+    public checkIfItemExists(item: String) {
+        if(this.inventory.indexOf(item) === -1) {
+            console.log("This item does not exist in your inventory")
+            return false
         }
         return true
     }
 
-        /*
+    /*
     Removes item from inventory after use
     */
-    private removeItemFromInventory(index: number) {
+    public removeItemFromInventory(item: String) {
+        let index = this.inventory.indexOf(item)
         if (index > -1) {
             this.inventory.splice(index, 1);
          }

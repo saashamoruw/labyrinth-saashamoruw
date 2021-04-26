@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Surroundings = void 0;
+/**
+ * Surroundings handles the connections between each area
+ */
 class Surroundings {
     constructor(north, south, east, west) {
         this.north = north;
@@ -8,7 +11,10 @@ class Surroundings {
         this.east = east;
         this.west = west;
     }
-    moveInDirection(direction) {
+    /**
+     * Gets the key of area in the provided direction
+     */
+    getAreaInDirection(direction) {
         switch (direction.toLowerCase()) {
             case "north": {
                 return this.north;
@@ -27,6 +33,9 @@ class Surroundings {
             }
         }
     }
+    /**
+     * Gets all valid directions the player can move in from the current area
+     */
     doorways() {
         let possDir = [];
         if (this.north !== undefined) {
