@@ -34,6 +34,10 @@ export class Hazard implements IHazard {
         return this.overcame;
     }
 
+    public getHazardKey(): String {
+        return this.hazardKey
+    }
+
     /**
      * Shows the nature of the hazard
      */

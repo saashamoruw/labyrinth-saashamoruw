@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Surroundings = void 0;
+const constants_1 = require("./constants");
 /**
  * Surroundings handles the connections between each area
  */
@@ -16,16 +17,16 @@ class Surroundings {
      */
     getAreaInDirection(direction) {
         switch (direction.toLowerCase()) {
-            case "north": {
+            case constants_1.NORTH: {
                 return this.north;
             }
-            case "south": {
+            case constants_1.SOUTH: {
                 return this.south;
             }
-            case "east": {
+            case constants_1.EAST: {
                 return this.east;
             }
-            case "west": {
+            case constants_1.WEST: {
                 return this.west;
             }
             default: {
@@ -39,16 +40,16 @@ class Surroundings {
     doorways() {
         let possDir = [];
         if (this.north !== undefined) {
-            possDir.push("north");
+            possDir.push(constants_1.NORTH);
         }
         if (this.south !== undefined) {
-            possDir.push("south");
+            possDir.push(constants_1.SOUTH);
         }
         if (this.east !== undefined) {
-            possDir.push("east");
+            possDir.push(constants_1.EAST);
         }
         if (this.west !== undefined) {
-            possDir.push("west");
+            possDir.push(constants_1.WEST);
         }
         console.log("There are doorways present in the following directions: ", possDir.toString());
     }

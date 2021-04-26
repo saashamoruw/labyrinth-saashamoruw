@@ -6,6 +6,7 @@ const Hazard_1 = require("./Components/Hazard");
 const Surroundings_1 = require("./Components/Surroundings");
 const Inventory_1 = require("./Components/Inventory");
 const Monster_1 = require("./Components/Monster");
+const Constants_1 = require("./Components/Constants");
 /*
 Labyrinth keeps track of all the elements of the game, and updates them as game goes on.
 */
@@ -15,13 +16,15 @@ class Labyrinth {
     */
     constructor() {
         this.gameMap = this.constructMap();
-        const startingArea = this.gameMap.get("entry");
-        if (startingArea === undefined) {
+        const startingArea = this.gameMap.get(Constants_1.ENTRY);
+        const endingArea = this.gameMap.get(Constants_1.EXIT);
+        if (startingArea === undefined || endingArea === undefined) {
             throw new Error('Could not initialize Labyrinth map');
         }
         this.inventory = new Inventory_1.Inventory();
-        this.monster = new Monster_1.Monster(Array.from(this.gameMap.keys()), "exit");
+        this.monster = new Monster_1.Monster(Array.from(this.gameMap.keys()), Constants_1.EXIT);
         this.startArea = startingArea;
+        this.endArea = endingArea;
         this.prevArea = startingArea;
         this.currArea = startingArea;
     }
@@ -102,7 +105,8 @@ class Labyrinth {
     }
     /****************************HELPER FUNCTIONS***************************/
     checkWin() {
-        if (this.currArea.getKey() === "exit" && this.inventory.checkIfItemExists("treasure")) {
+        let keyToWin = this.endArea.getHazardKey();
+        if (this.currArea.getKey() === this.endArea.getKey() && this.inventory.checkIfItemExists(keyToWin)) {
             console.log('Congratulations! You have won the game');
             return false;
         }
@@ -114,7 +118,7 @@ class Labyrinth {
      * Uses hardcoded JSON file to construct labyrinth
      */
     constructMap() {
-        let blueprint = require('../game-details/map.json');
+        let blueprint = require(Constants_1.MAP_PATH);
         let map = new Map();
         for (const key in blueprint) {
             const value = blueprint[key];

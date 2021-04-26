@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Area = void 0;
+const Constants_1 = require("./Constants");
 /*
 Represents an area in the labyrinth
 */
@@ -40,7 +41,7 @@ class Area {
      * Checks if the area is the exit to the labyrinth
      */
     isExit() {
-        if (this.key === "exit") {
+        if (this.key === Constants_1.EXIT) {
             return true;
         }
         return false;
@@ -73,6 +74,9 @@ class Area {
      */
     overcomeHazard(item) {
         return this.hazard.overcomeHazard(item);
+    }
+    getHazardKey() {
+        return this.hazard.getHazardKey();
     }
     showPossibleDirections() {
         this.surroundings.doorways();

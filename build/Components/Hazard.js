@@ -34,6 +34,9 @@ class Hazard {
     haveOvercome() {
         return this.overcame;
     }
+    getHazardKey() {
+        return this.hazardKey;
+    }
     /**
      * Shows the nature of the hazard
      */

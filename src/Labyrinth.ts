@@ -3,6 +3,9 @@ import {Hazard} from './Components/Hazard'
 import {Surroundings} from './Components/Surroundings'
 import {Inventory} from './Components/Inventory'
 import {Monster} from './Components/Monster'
+import {ENTRY, EXIT, MAP_PATH} from './Components/Constants'
+
+
 /*
 Labyrinth keeps track of all the elements of the game, and updates them as game goes on. 
 */
@@ -11,6 +14,7 @@ export class Labyrinth {
     private inventory: Inventory
     private monster: Monster
     private startArea: Area
+    private endArea: Area
     private prevArea: Area
     private currArea: Area
 
@@ -19,13 +23,15 @@ export class Labyrinth {
     */
     constructor() {
         this.gameMap = this.constructMap()
-        const startingArea = this.gameMap.get("entry")
-        if(startingArea === undefined) {
+        const startingArea = this.gameMap.get(ENTRY)
+        const endingArea = this.gameMap.get(EXIT)
+        if(startingArea === undefined || endingArea === undefined) {
             throw new Error('Could not initialize Labyrinth map')
         }
         this.inventory = new Inventory()
-        this.monster = new Monster(Array.from(this.gameMap.keys()), "exit")
+        this.monster = new Monster(Array.from(this.gameMap.keys()), EXIT)
         this.startArea = startingArea
+        this.endArea = endingArea
         this.prevArea = startingArea
         this.currArea = startingArea
     }
@@ -111,7 +117,8 @@ export class Labyrinth {
 
     /****************************HELPER FUNCTIONS***************************/
         private checkWin(): boolean {
-            if (this.currArea.getKey() === "exit" && this.inventory.checkIfItemExists("treasure")) {
+            let keyToWin = this.endArea.getHazardKey()
+            if (this.currArea.getKey() === this.endArea.getKey() && this.inventory.checkIfItemExists(keyToWin)) {
                 console.log('Congratulations! You have won the game')
                 return false
             } else {
@@ -122,7 +129,7 @@ export class Labyrinth {
      * Uses hardcoded JSON file to construct labyrinth
      */
          private constructMap(): Map<String, Area> {
-            let blueprint = require('../game-details/map.json');
+            let blueprint = require(MAP_PATH);
             let map = new Map()
             for (const key in blueprint) {
                 const value = blueprint[key]

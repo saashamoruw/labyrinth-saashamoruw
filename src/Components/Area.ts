@@ -1,5 +1,6 @@
 import {Hazard} from './Hazard'
 import {Surroundings} from './Surroundings'
+import {EXIT} from './Constants'
 
 /*
 Represents an area in the labyrinth
@@ -37,7 +38,7 @@ export class Area {
      * Checks if the area is the exit to the labyrinth
      */
     public isExit(): boolean {
-        if(this.key === "exit") {
+        if(this.key === EXIT) {
             return true
         }
         return false
@@ -73,6 +74,10 @@ export class Area {
      */
     public overcomeHazard(item: String): boolean {
         return this.hazard.overcomeHazard(item)
+    }
+
+    public getHazardKey(): String {
+        return this.hazard.getHazardKey()
     }
 
     public showPossibleDirections(): void {

@@ -1,3 +1,5 @@
+import {MONSTER_KEY} from './Constants'
+
 /**
  * Represents a monster that randomly wanders the game map
  */
@@ -5,11 +7,10 @@ export class Monster implements IHazard {
     private overcome: boolean = false
     private description: String = 
     "A big scary monster who likes to eat humans for fun has entered the room. The only thing that can slay it is an offering of cake :)"
-    private key: String = "cake"
+    private key: String = MONSTER_KEY
     private nextArea: number
     constructor(private areas: String[], private currArea: String) {
         this.nextArea = this.areas.length - 1
-        // console.log(areas)
     }
     
     /**
@@ -18,6 +19,7 @@ export class Monster implements IHazard {
     public move() {
         // Moves the monster to a random area in the map
         // let newArea = this.areas[Math.floor(Math.random() * this.areas.length)];
+        
         // Moves the monster one room at a time
         this.changeNextArea()
         let newArea = this.areas[this.nextArea]

@@ -1,3 +1,5 @@
+import {NORTH, SOUTH, EAST, WEST} from './constants'
+
 /**
  * Surroundings handles the connections between each area 
  */
@@ -9,16 +11,16 @@ export class Surroundings {
      */
     public getAreaInDirection(direction:String) :String|undefined {
         switch(direction.toLowerCase()) {
-            case "north": {
+            case NORTH: {
                 return this.north
             }
-            case "south": {
+            case SOUTH: {
                 return this.south
             }
-            case "east": {
+            case EAST: {
                 return this.east
             }  
-            case "west": {
+            case WEST: {
                 return this.west
             }
             default: {
@@ -33,16 +35,16 @@ export class Surroundings {
     public doorways(): void {
         let possDir = []
         if(this.north !== undefined) {
-            possDir.push("north")
+            possDir.push(NORTH)
         }
         if(this.south !== undefined) {
-            possDir.push("south")
+            possDir.push(SOUTH)
         }
         if(this.east !== undefined) {
-            possDir.push("east")
+            possDir.push(EAST)
         }
         if(this.west !== undefined) {
-            possDir.push("west")
+            possDir.push(WEST)
         }
         console.log("There are doorways present in the following directions: ", possDir.toString())
     }

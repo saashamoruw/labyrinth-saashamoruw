@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Monster = void 0;
+const Constants_1 = require("./Constants");
 /**
  * Represents a monster that randomly wanders the game map
  */
@@ -10,9 +11,8 @@ class Monster {
         this.currArea = currArea;
         this.overcome = false;
         this.description = "A big scary monster who likes to eat humans for fun has entered the room. The only thing that can slay it is an offering of cake :)";
-        this.key = "cake";
+        this.key = Constants_1.MONSTER_KEY;
         this.nextArea = this.areas.length - 1;
-        // console.log(areas)
     }
     /**
      * Moves the monster through the labyrinth
