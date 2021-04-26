@@ -9,6 +9,7 @@ This repository contains code for a simple text-based adventure game, created fo
 - [Sample](#sample)
 - [Requirements](#requirements)
 - [Setup](#setup)
+- [Custom Map Structure](#custom-map-structure)
 
 ## Description
 A simple text-based adventure game (similar to the classic games Colossal Cave Adventure or Zork), playable on the command line. Players will be tasked with navigating a (small) labyrinth, finding a "treasure" of some kind while avoiding hazards and dangers, and successfully make it to the exit.
@@ -61,4 +62,55 @@ npm install -g typescript
 npm install
 tsc
 node build/app.js
+```
+
+## Custom Map Stucture
+Edit the JSON file in the `"game-details"` folder. It follows the following convention to define each area. 
+Required specifications:
+- All keys must be unique
+- The first and last entry should be `"entry"` and `"exit"` respectively. (Can be changed in Constants)
+- One area must have the item `"cake"` to slay the wandering monster. (Can be changed in Constants)
+- Each area must contain name, description and neighbors
+- Items, Hazards and Hazard Key is optional
+- If Hazard exists for an area, the Hazard Key must exist
+
+```
+{
+  "entry": {
+    "name": "The entry",
+    "description: "You have entered"
+    "item":"cake",
+    "neighbor": 
+    {
+        "south": "some-unique-key"
+    }
+  },
+  "some-unique-key": {
+    "name": "Some descriptive name",
+        "description": "You have entered <describe the area>",
+        "hazard": "You can't move because you are tired",
+        "hazardkey": "food",
+        "neighbor": 
+        {
+            "south": "exit",
+            "north": "entry",
+            "east": "entry",
+            "west": "exit"
+        }
+  },
+  .......
+  "exit": {
+   "name": "The exit",
+        "description": "You can leave",
+        "hazard": "You need the key",
+        "hazardkey": "food",
+        "neighbor": 
+        {
+            "south": "exit",
+            "north": "entry",
+            "east": "entry",
+            "west": "exit"
+        }
+  }
+}
 ```
