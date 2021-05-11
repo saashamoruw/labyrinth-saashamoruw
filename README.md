@@ -2,7 +2,6 @@
 
 This repository contains code for a simple text-based adventure game, created for the _Software Architecture_ course at the UW iSchool.
 
-
 ## Table of Contents
 - [Description](#description)
 - [Commands](#commands)
@@ -10,6 +9,7 @@ This repository contains code for a simple text-based adventure game, created fo
 - [Requirements](#requirements)
 - [Setup](#setup)
 - [Custom Map Structure](#custom-map-structure)
+- [Game Solution](#game-solution)
 
 ## Description
 A simple text-based adventure game (similar to the classic games Colossal Cave Adventure or Zork), playable on the command line. Players will be tasked with navigating a (small) labyrinth, finding a "treasure" of some kind while avoiding hazards and dangers, and successfully make it to the exit.
@@ -114,3 +114,8 @@ Required specifications:
   }
 }
 ```
+
+
+## Game Solution
+Here is a sneak peek into the current default map
+![game map in squares](./game-details/map_and_rules.png)
